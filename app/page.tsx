@@ -1,6 +1,6 @@
 import Footer from "@/components/core/Footer";
 import { BanIcon, LinkIcon } from "lucide-react";
-import Image from "next/image";
+import { GeistMono } from "geist/font/mono";
 import Link from "next/link";
 
 interface CardProps {
@@ -21,14 +21,16 @@ export default function Page() {
     <>
       <section className="max-w-4xl py-10 px-3 mx-auto">
         <div className="ml-1">
-          <h1 className="basement text-4xl">
+          <h1 className="font-basement text-4xl">
             basement
           </h1>
         </div>
 
         <div className="p-5 mt-5 border bg-zinc-950 rounded-lg border-zinc-900">
           <p>
-            👋 Hi there. You are on the basement works experimental corner. 
+            👋 Hi there, welcome.
+            <br /><br />
+            You are on the <span className={`${GeistMono.className} px-1 py-0.5 border rounded-md bg-zinc-900 border-zinc-800`}>basement experimental corner</span>. 
             <br />
             Here you&apos;ll find all kinds of 3d visuals, animations, shaders and creative development related stuff.
             <br />
@@ -39,7 +41,7 @@ export default function Page() {
 
         <section className="mt-10 space-y-5">
           <div>
-            <h1 className="ml-1 mb-5 font-bold text-xl">Useful Links</h1>
+            <h1 className="ml-1 mb-5 font-bold text-xl">Useful Links: Awesome Resources</h1>
           </div>
           <div className="space-y-2 bg-zinc-950 rounded-lg border-2 py-1 border-zinc-900">
             <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none rounded-lg bg-zinc-950 shadow-md p-4">
@@ -118,15 +120,15 @@ export default function Page() {
         {/* Experiments */}
         <section className="mt-10 space-y-5">
           <div>
-            <h1 className="ml-1 mb-5 font-bold text-xl">Experiments</h1>
+            <h1 className="ml-1 mb-5 font-bold text-xl">Experiments: Where Things Get Developed</h1>
           </div>
           <div className="space-y-2 bg-zinc-950 rounded-lg border-2 py-1 border-zinc-900">
             <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none rounded-lg bg-zinc-950 shadow-md p-4">
               <div className="bg-zinc-800 p-2.5 rounded-full">
                 <BanIcon size={16}/>
               </div>
-              <h1 className="text-md font-semibold">
-                Release soon 😝
+              <h1 className="font-bold text-md">
+                Hang in there, we&apos;re cooking for this section 😝
               </h1>
             </Card>
           </div>

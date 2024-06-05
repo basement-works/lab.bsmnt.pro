@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'BasementBlack';
-  src: url('/fonts/BasementGrotesque-Black.woff2') format('woff2'),
-       url('/fonts/custom-font.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'BasementGrotesque-Black';
+	src: url('/fonts/BasementGrotesque-Black.woff2') format('woff2');
+	font-weight: 900;
+	font-display: swap;
+	font-style: normal;
 }
 
 :root {

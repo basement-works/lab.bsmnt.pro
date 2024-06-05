@@ -8,9 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        custom: ['BasementBlack', 'sans-serif'],
-      },
+      	fontFamily: {
+				basement: 'BasementGrotesque-Black, sans-serif',
+				display: 'BasementGrotesque-Display, sans-serif',
+			},
     },
   },
   plugins: [],
