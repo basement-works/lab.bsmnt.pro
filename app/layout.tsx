@@ -6,8 +6,8 @@ import "./globals.css";
 const geistSans = GeistSans
 
 export const metadata: Metadata = {
-  title: "Basement Labs",
-  description: "Basemenr Works Toys",
+  title: "BSMNT — Laboratory",
+  description: "Basement Works Laboratory",
 };
 
 export default function RootLayout({

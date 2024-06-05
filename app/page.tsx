@@ -2,6 +2,8 @@
 import { GeistMono } from 'geist/font/mono';
 import { useNetworkSpeedTest } from '@rtbjs/network-speed-test';
 import { useEffect, useState } from 'react';
+import { Wifi } from 'lucide-react';
+
 
 type UseNetworkSpeedTest = {
   runTest: (options?: RunTestOptions) => void;
@@ -68,18 +70,60 @@ export default function Home() {
     }
   }, [download.isComplete, download.result]);
 
+      const [ipAddress, setIpAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+    const [isp, setISP] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchGeoData = async () => {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                setIpAddress(data.ip);
+                setCity(data.city);
+                setCountry(data.country_name);
+                setISP(data.org);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching geo data:', error);
+            }
+        };
+
+        fetchGeoData();
+    }, []);
+
   return (
     <>
-      <div className='mx-auto text-center my-48'>
-        <h1 className='text-3xl mb-3 font-bold'>
-          Basement Network <span className='animate-pulse'>🛜</span>
+    
+      <div className='mx-auto justify-center text-lg text-center my-48'>
+      <h1 className='text-3xl flex items-center justify-center mb-3 font-bold'>
+        Basement Network 
+        <span className='animate-pulse'>
+          <Wifi className='p-1 border-2 rounded-full ml-2 text-white' />
+        </span>
       </h1>
       <section>
+        <h1>Internet Provider: {isp}</h1>
+         <div className=''>
+           {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <p>
+                   <div>
+                       {ipAddress} — {city}, {country}
+                   </div>
+                </p>
+            )}
+        </div>
+      </section>
+      <section className={`${GeistMono.className} mt-4 mb-6`}>
         <div>
-          Download Speed: {download.result.meanClientMbps !== undefined ? download.result.meanClientMbps.toFixed(2) : 0} Mbps
+          Download Speed: {download.result.meanClientMbps !== undefined ? download.result.meanClientMbps.toFixed(2) : 0} MB/s
         </div>
         <div>
-          Upload Speed: {upload.result.meanClientMbps !== undefined ? upload.result.meanClientMbps.toFixed(2) : 0} Mbps
+          Upload Speed: {upload.result.meanClientMbps !== undefined ? upload.result.meanClientMbps.toFixed(2) : 0} MB/s
         </div>
       </section>
        <section className='space-x-3 mt-3'>
