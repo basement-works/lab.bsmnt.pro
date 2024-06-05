@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'BasementBlack';
+  src: url('/fonts/BasementGrotesque-Black.woff2') format('woff2'),
+       url('/fonts/custom-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
     background-color: #000;
     color: azure;
     cursor: crosshair !important;
 }
 .basement {
-  font-family: 'Basement Grotesque';
-}
-
-.basement-upper {
-  font-family: 'Basement Grotesque Display Ultra Black';
+  font-family: 'BasementBasementBlack';
 }
 
 button {
