@@ -33,7 +33,7 @@ const GeoLocation = () => {
             ) : (
                 <div>
                    <p>
-                       Your IP Address: {ipAddress}, {isp} — {city}, {country} 👋
+                        {city}, {country}.
                    </p>
                 </div>
             )}

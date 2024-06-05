@@ -1,143 +1,139 @@
-"use client";
-import { GeistMono } from 'geist/font/mono';
-import { useNetworkSpeedTest } from '@rtbjs/network-speed-test';
-import { useEffect, useState } from 'react';
-import { Wifi } from 'lucide-react';
+import Footer from "@/components/core/Footer";
+import { BanIcon, LinkIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
+interface CardProps {
+  className: string;
+  children: React.ReactNode;
+}
 
-type UseNetworkSpeedTest = {
-  runTest: (options?: RunTestOptions) => void;
-  download: {
-    isRunning: boolean;
-    isComplete: boolean;
-    result: {
-      error?: any;
-      elapsedTime?: number;
-      meanClientMbps?: number;
-      numberOfBytes?: number;
-    };
-  };
-  upload: {
-    isRunning: boolean;
-    isComplete: boolean;
-    result: {
-      error?: any;
-      elapsedTime?: number;
-      meanClientMbps?: number;
-      numberOfBytes?: number;
-    };
-  };
-  isRunning: boolean;
-  isComplete: boolean;
+const Card: React.FC<CardProps> = ({ className, children }) => {
+  return (
+    <div className={className}>
+      {children}
+    </div>
+  );
 };
 
-type RunTestOptions = {
-  download?: boolean;
-  upload?: boolean;
-  runUploadBeforeDownload?: boolean;
-};
-
-export default function Home() {
-  const { runTest, download, upload } = useNetworkSpeedTest();
-  const [isTesting, setIsTesting] = useState({ upload: false, download: false });
- const [results, setResults] = useState({ download: 0, upload: 0 });
- 
-  const handleRunDownloadTest = () => {
-    setIsTesting(prevState => ({ ...prevState, download: true }));
-    runTest({ download: true, upload: false });
-  };
-
-  const handleRunUploadTest = () => {
-    setIsTesting(prevState => ({ ...prevState, upload: true }));
-    runTest({ upload: true, download: false });
-  };
-
-   const handleReset = () => {
-    setResults({ download: 0, upload: 0 });
-  };
-
-  useEffect(() => {
-    if (upload.isComplete) {
-      console.log("Upload test completed:", upload.result);
-      setIsTesting(prevState => ({ ...prevState, upload: false }));
-    }
-  }, [upload.isComplete, upload.result]);
-
-  useEffect(() => {
-    if (download.isComplete) {
-      console.log("Download test completed:", download.result);
-      setIsTesting(prevState => ({ ...prevState, download: false }));
-    }
-  }, [download.isComplete, download.result]);
-
-      const [ipAddress, setIpAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [country, setCountry] = useState('');
-    const [isp, setISP] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchGeoData = async () => {
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                setIpAddress(data.ip);
-                setCity(data.city);
-                setCountry(data.country_name);
-                setISP(data.org);
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching geo data:', error);
-            }
-        };
-
-        fetchGeoData();
-    }, []);
-
+export default function Page() {
   return (
     <>
-    
-      <div className='mx-auto justify-center text-lg text-center my-48'>
-      <h1 className='text-3xl flex items-center justify-center mb-3 font-bold'>
-        Basement Network 
-        <span className='animate-pulse'>
-          <Wifi className='p-1 border-2 rounded-full ml-2 text-white' />
-        </span>
-      </h1>
-      <section>
-        <h1>Internet Provider: {isp}</h1>
-         <div className=''>
-           {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <p>
-                   <div>
-                       {ipAddress} — {city}, {country}
-                   </div>
-                </p>
-            )}
+      <section className="max-w-4xl py-10 px-3 mx-auto">
+        <div className="ml-1">
+          <h1 className="basement text-4xl">
+            basement
+          </h1>
         </div>
-      </section>
-      <section className={`${GeistMono.className} mt-4 mb-6`}>
-        <div>
-          Download Speed: {download.result.meanClientMbps !== undefined ? download.result.meanClientMbps.toFixed(2) : 0} MB/s
+
+        <div className="p-5 mt-5 border bg-zinc-950 rounded-lg border-zinc-900">
+          <p>
+            👋 Hi there. You are on the basement works experimental corner. 
+            <br />
+            Here you&apos;ll find all kinds of 3d visuals, animations, shaders and creative development related stuff.
+            <br />
+            <br />
+            Take a look at the examples below and don&apos;t forget to leave a ⭐️ on the <Link className="underline" href='https://github.com/basement-works/laboratory.git'>github repo</Link>.
+          </p>
         </div>
-        <div>
-          Upload Speed: {upload.result.meanClientMbps !== undefined ? upload.result.meanClientMbps.toFixed(2) : 0} MB/s
-        </div>
+
+        <section className="mt-10 space-y-5">
+          <div>
+            <h1 className="ml-1 mb-5 font-bold text-xl">Useful Links</h1>
+          </div>
+          <div className="space-y-2 bg-zinc-950 rounded-lg border-2 py-1 border-zinc-900">
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none rounded-lg bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://hofk.de/main/discourse.threejs/'>
+                <h1 className="text-md font-semibold">
+                  Incredible discourse.threejs examples 🤯
+                </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://webgl-shaders.com/'>
+                <h1 className="text-md font-semibold">
+                  Amazing WebGL Shaders 🔥
+                </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://gltf.pmnd.rs/'>
+                <h1 className="text-md font-semibold">
+                  Tool | Three Fiber GLTF scaffoling
+                </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://gltf.report/'>
+                <h1 className="text-md font-semibold">
+                  Tool | GLTF Report
+                </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://medium.com/@pailhead011/extending-three-js-materials-with-glsl-78ea7bbb9270'>
+                <h1 className="text-md font-semibold">
+                  Article | Extending Three.js materials with GLSL 🪄
+                </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://webrtc.github.io/samples/'>
+              <h1 className="text-md font-semibold">
+                Examples | WebRTC code examples
+              </h1>
+              </Link>
+            </Card>
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <LinkIcon size={16}/>
+              </div>
+              <Link href='https://github.com/mrdoob/three.js/tree/master/src/renderers/shaders'>
+              <h1 className="text-md font-semibold">
+                Source | ThreeJS core shader chunks
+              </h1>
+              </Link>
+            </Card>
+          </div>
+        </section>
+
+        {/* Experiments */}
+        <section className="mt-10 space-y-5">
+          <div>
+            <h1 className="ml-1 mb-5 font-bold text-xl">Experiments</h1>
+          </div>
+          <div className="space-y-2 bg-zinc-950 rounded-lg border-2 py-1 border-zinc-900">
+            <Card className="flex items-center space-x-3 border-t border-zinc-900 first:border-none rounded-lg bg-zinc-950 shadow-md p-4">
+              <div className="bg-zinc-800 p-2.5 rounded-full">
+                <BanIcon size={16}/>
+              </div>
+              <h1 className="text-md font-semibold">
+                Release soon 😝
+              </h1>
+            </Card>
+          </div>
+        </section>
+        {/* End of experiments */}
+        <Footer/>      
       </section>
-       <section className='space-x-3 mt-3'>
-        <button className='bg-sky-500 px-2 py-1 rounded-lg' onClick={handleRunDownloadTest} disabled={isTesting.download || isTesting.upload}>
-          {isTesting.download ? 'Running Download Test...' : 'Run Download Test'}
-        </button>
-        <button className='bg-sky-500 px-2 py-1 rounded-lg' onClick={handleRunUploadTest} disabled={isTesting.download || isTesting.upload}>
-          {isTesting.upload ? 'Running Upload Test...' : 'Run Upload Test'}
-        </button>
-        <button className='bg-rose-500 px-2 py-1 rounded-lg'>
-          Reset
-        </button>
-      </section>
-      </div>
     </>
   );
 }

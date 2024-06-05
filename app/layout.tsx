@@ -6,7 +6,7 @@ import "./globals.css";
 const geistSans = GeistSans
 
 export const metadata: Metadata = {
-  title: "BSMNT — Laboratory",
+  title: "Experiments | basement",
   description: "Basement Works Laboratory",
 };
 

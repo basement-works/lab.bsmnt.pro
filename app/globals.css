@@ -7,6 +7,13 @@
     color: azure;
     cursor: crosshair !important;
 }
+.basement {
+  font-family: 'Basement Grotesque';
+}
+
+.basement-upper {
+  font-family: 'Basement Grotesque Display Ultra Black';
+}
 
 button {
   cursor: pointer !important;
