@@ -5,7 +5,11 @@
 :root {
     background-color: #000;
     color: azure;
-    cursor: crosshair;
+    cursor: crosshair !important;
+}
+
+button {
+  cursor: pointer !important;
 }
 
 ::selection {
